@@ -28,3 +28,16 @@
     }
     return dis;
 }
+
+const Car = () => {
+  let res = '';
+
+  for (let i = 0; i < 20; i++) {
+    res += Math.floor(Math.random() * 4)
+  }
+
+  return res;
+};
+
+
+console.log(Car());
