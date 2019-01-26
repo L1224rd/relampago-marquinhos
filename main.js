@@ -1,8 +1,8 @@
 window.showHistory = (element) => {
-  const cars = [
-    element.getAttribute('car0').split(''),
-    element.getAttribute('car1').split(''),
-    element.getAttribute('car2').split(''),
+  const bacterias = [
+    element.getAttribute('bacteria0').split(''),
+    element.getAttribute('bacteria1').split(''),
+    element.getAttribute('bacteria2').split(''),
   ];
 
   const c0 = document.getElementById('history0');
@@ -23,11 +23,6 @@ window.showHistory = (element) => {
     ctxs[i].fillStyle = 'white'
     ctxs[i].fill();
 
-    ctxs[i].beginPath();
-    ctxs[i].arc(coordss[i].x, coordss[i].y, 3, 0, 2 * Math.PI);
-    ctxs[i].fillStyle = 'green'
-    ctxs[i].fill();
-
     ctxs[i].moveTo(100, 50);
 
     const directions = [
@@ -37,16 +32,26 @@ window.showHistory = (element) => {
       { x: -5, y: 0 },
     ];
 
-    cars[i].forEach((cmd) => {
+    bacterias[i].forEach((cmd) => {
       ctxs[i].lineTo(coordss[i].x + directions[cmd].x, coordss[i].y + directions[cmd].y);
       coordss[i].x += directions[cmd].x;
       coordss[i].y += directions[cmd].y;
     });
 
     ctxs[i].stroke();
+
+    ctxs[i].beginPath();
+    ctxs[i].arc(100, 50, 3, 0, 2 * Math.PI);
+    ctxs[i].fillStyle = 'green'
+    ctxs[i].fill();
+
+    ctxs[i].beginPath();
+    ctxs[i].arc(coordss[i].x, coordss[i].y, 3, 0, 2 * Math.PI);
+    ctxs[i].fillStyle = 'red'
+    ctxs[i].fill();
   }
 }
 
 avgs.forEach((avg) => { // get data from avgs.js and make graph
-  document.querySelector('#graph').innerHTML += `<span car0="${avg.cars[0]}" car1="${avg.cars[1]}" car2="${avg.cars[2]}" onclick="window.showHistory(this)" style="height: ${avg.avg * 20}px; width: 15px; background-color: turquoise; cursor: pointer;"></span>`;
+  document.querySelector('#graph').innerHTML += `<span bacteria0="${avg.bacterias[0]}" bacteria1="${avg.bacterias[1]}" bacteria2="${avg.bacterias[2]}" onclick="window.showHistory(this)" style="height: ${avg.avg * 20}px; width: 15px; background-color: turquoise; cursor: pointer;"></span>`;
 });

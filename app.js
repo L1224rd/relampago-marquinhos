@@ -6,7 +6,7 @@
  */
 
 /**
- * In our case, we are "teaching" cars, to go to the right,
+ * In our case, we are "teaching" bacterias, to go to the right,
  * as fast as possible, without telling them to go to the right.
  */
 
@@ -14,21 +14,21 @@ const fs = require('fs'); // Used to write avgs.js file that will be used to see
 
 let generation = 0; // Current generation index
 
-const Car = () => { // A 'car' is a string with directions, 0=up, 1=right, 2=down, 3=left 
+const Bacteria = () => { // A 'bacteria' is a string with directions, 0=up, 1=right, 2=down, 3=left 
   let res = '';
 
-  for (let i = 0; i < 20; i++) { // Each car has 20 random directions
+  for (let i = 0; i < 20; i++) { // Each bacteria has 20 random directions
     res += Math.floor(Math.random() * 4)
   }
 
   return res;
 };
 
-const getDist = (car) => { // Distance from origin to current position at 'x' axis
+const getDist = (bacteria) => { // Distance from origin to current position at 'x' axis
   let dist = 0;
 
 
-  car.split('').forEach((char) => { // 1=right, 3=left
+  bacteria.split('').forEach((char) => { // 1=right, 3=left
     if (char === '1') {
       dist += 1;
     }
@@ -40,45 +40,45 @@ const getDist = (car) => { // Distance from origin to current position at 'x' ax
   return dist;
 };
 
-const procriate = (cars) => { // Make a better generations from the current one
+const procriate = (bacterias) => { // Make a better generations from the current one
   generation++;
 
-  const newCars = [...cars];
+  const newBacterias = [...bacterias];
 
-  newCars.sort((a, b) => { // Order the cars by their distances
+  newBacterias.sort((a, b) => { // Order the bacterias by their distances
     return getDist(b) - getDist(a);
   });
 
 
-  // "kill" the second half of the cars
+  // "kill" the second half of the bacterias
   // Duplicate the first half
   // Change one property of the "children" of the first half (mutate a gen randomly)
 
-  const topCars = newCars.slice(0, newCars.length / 2);
-  const bottomCars = [...topCars];
+  const topBacterias = newBacterias.slice(0, newBacterias.length / 2);
+  const bottomBacterias = [...topBacterias];
 
-  const carsModified = topCars.concat(bottomCars.map((car) => { // "mutate" one of the "gens" of the car
-    const index = Math.floor(Math.random() * car.length);
+  const bacteriasModified = topBacterias.concat(bottomBacterias.map((bacteria) => { // "mutate" one of the "gens" of the bacteria
+    const index = Math.floor(Math.random() * bacteria.length);
     const newDirection = Math.floor(Math.random() * 4);
-    return car.substr(0, index) + newDirection + car.substr(index + (newDirection + '').length);
+    return bacteria.substr(0, index) + newDirection + bacteria.substr(index + (newDirection + '').length);
   }));
 
-  return carsModified;
+  return bacteriasModified;
 };
 
-const stats = (cars) => { // Get stats such as best car, worst car and average
+const stats = (bacterias) => { // Get stats such as best bacteria, worst bacteria and average
   let min = 100;
   let max = 0;
   let sum = 0;
 
-  cars.forEach(car => {
-    if (getDist(car) < min) min = getDist(car);
-    if (getDist(car) > max) max = getDist(car);
-    sum += getDist(car);
+  bacterias.forEach(bacteria => {
+    if (getDist(bacteria) < min) min = getDist(bacteria);
+    if (getDist(bacteria) > max) max = getDist(bacteria);
+    sum += getDist(bacteria);
   });
 
   const name = `generation ${generation}`;
-  const avg = (sum / cars.length).toFixed(2);
+  const avg = (sum / bacterias.length).toFixed(2);
 
   return {
     name, min, max, avg,
@@ -88,13 +88,13 @@ const stats = (cars) => { // Get stats such as best car, worst car and average
 
 // ================================================= //
 
-const myCars = [];
+const myBacterias = [];
 
-for (let i = 0; i < 50; i++) { // Generate a generation with 50 cars
-  myCars.push(Car());
+for (let i = 0; i < 50; i++) { // Generate a generation with 50 bacterias
+  myBacterias.push(Bacteria());
 }
 
-let currentGeneration = [...myCars];
+let currentGeneration = [...myBacterias];
 
 const avgs = [];
 <<<<<<< HEAD
@@ -112,7 +112,7 @@ for (let i = 0; i < 70; i++) { // Evolve them 70 times
 
   avgs.push({
     avg: stats(currentGeneration).avg,
-    cars: [
+    bacterias: [
       currentGeneration[currentGeneration.length - 1],
       currentGeneration[currentGeneration.length / 2],
       currentGeneration[0],
