@@ -99,8 +99,13 @@ for (let i = 0; i < 50; i++) { // generate a generation with 50 cars
 let currentGeneration = [...myCars];
 
 const avgs = [];
+const POI = [0, 20, 40, 60, 99]; // Points Of Iterest, used to console specifc generations
 
 for (let i = 0; i < 100; i++) { // evolve them 100 times
+  if(POI.indexOf(i) !== -1){
+    console.log(stats(currentGeneration)); // console specifc generation
+    console.log(currentGeneration);
+  }
   avgs.push(stats(currentGeneration).avg); // used to make a graph in index.html
   currentGeneration = procriate(currentGeneration);
 }
