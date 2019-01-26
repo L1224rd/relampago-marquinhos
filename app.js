@@ -111,6 +111,8 @@ for (let i = 0; i < 100; i++) { // Evolve them 100 times
   avgs.push({
     avg: stats(currentGeneration).avg,
     medium: currentGeneration[currentGeneration.length / 2],
+    best: currentGeneration[0],
+    worst: currentGeneration[50],
   }); // Used to make a graph in index.html
   currentGeneration = procriate(currentGeneration);
 }
