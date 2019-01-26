@@ -1,0 +1,29 @@
+body {
+  background-color: rgb(48, 48, 48);
+}
+
+#graph {
+  position: absolute;
+  width: 100vw;
+  height: 400px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  bottom: 0px;
+  right: 0px;
+}
+
+#draws-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#draws-container canvas{
+  background-color: white;
+}
+
+p {
+  color: white;
+  text-align: center;
+}
