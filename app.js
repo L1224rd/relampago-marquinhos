@@ -1,5 +1,5 @@
 /**
- * This project shows one of the basic principles used in AI.
+ * This project shows one of the basic principles used in AI machine learning.
  * Eliminating individuals who do not perform well in a given task,
  * selecting individuals who best meet the requirements chosen and 
  * "breeding" from them (Natural Selection).
