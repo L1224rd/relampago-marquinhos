@@ -1,6 +1,6 @@
 # Relampago Marquinhos
 
-Basic AI machine learning process
+Basic AI machine learning process without any library
 
 To run:
 `$ node app.js`
