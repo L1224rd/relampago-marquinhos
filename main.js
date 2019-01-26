@@ -36,5 +36,5 @@ window.showHistory = (element) => {
 }
 
 avgs.forEach((avg) => { // get data from avgs.js and make graph
-  document.querySelector('#graph').innerHTML += `<span id="${avg.medium}" onclick="window.showHistory(this)" style="height: ${avg.avg * 20}px; width: 10px; background-color: #006e21; cursor: pointer;"></span>`;
+  document.querySelector('#graph').innerHTML += `<span id="${avg.medium}" onclick="window.showHistory(this)" style="height: ${avg.avg * 20}px; width: 15px; background-color: turquoise; cursor: pointer;"></span>`;
 });

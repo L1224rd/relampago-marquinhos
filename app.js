@@ -103,7 +103,7 @@ const avgs = [];
 
 const POI = [0, 20, 40, 60, 99]; // Points Of Interest, used to console specific generations
 
-for (let i = 0; i < 100; i++) { // Evolve them 100 times
+for (let i = 0; i < 70; i++) { // Evolve them 70 times
   if (POI.indexOf(i) !== -1) {
     console.log(stats(currentGeneration)); // Console specific generation
     console.log(currentGeneration);
