@@ -81,10 +81,7 @@ const stats = (cars) => { // get stats such as best car, worst car and average
   const avg = (sum / cars.length).toFixed(2);
 
   return {
-    name,
-    min,
-    max,
-    avg,
+    name, min, max, avg,
   };
 }
 
