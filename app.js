@@ -13,11 +13,12 @@
 const fs = require('fs'); // Used to write avgs.js file that will be used to see a graph at index.html
 
 let generation = 0; // Current generation index
+const moves = 20; // number of moves the bacteria will get
 
 const Bacteria = () => { // A 'bacteria' is a string with directions, 0=up, 1=right, 2=down, 3=left 
   let res = '';
 
-  for (let i = 0; i < 20; i++) { // Each bacteria has 20 random directions
+  for (let i = 0; i < moves; i++) { // Each bacteria has ${moves} random directions
     res += Math.floor(Math.random() * 4)
   }
 
@@ -97,19 +98,9 @@ for (let i = 0; i < 50; i++) { // Generate a generation with 50 bacterias
 let currentGeneration = [...myBacterias];
 
 const avgs = [];
-<<<<<<< HEAD
-const POI = [0, 20, 40, 60, 99]; // Points Of Interest, used to console specifc generations
-=======
->>>>>>> 1e948f0459391a240f1349f5c811b3937573169b
 
-const POI = [0, 20, 40, 60, 99]; // Points Of Interest, used to console specific generations
-
-for (let i = 0; i < 70; i++) { // Evolve them 70 times
-  if (POI.indexOf(i) !== -1) {
-    console.log(stats(currentGeneration)); // Console specific generation
-    console.log(currentGeneration);
-  }
-
+while (getDist(currentGeneration[currentGeneration.length / 2]) < moves) { // Evolve them 70 times  
+  currentGeneration = procriate(currentGeneration);
   avgs.push({
     avg: stats(currentGeneration).avg,
     bacterias: [
@@ -118,7 +109,6 @@ for (let i = 0; i < 70; i++) { // Evolve them 70 times
       currentGeneration[0],
     ],
   }); // Used to make a graph in index.html
-  currentGeneration = procriate(currentGeneration);
 }
 
 fs.writeFile("./avgs.js", `const avgs = ${JSON.stringify(avgs)};`, (err) => { // data of the graph
