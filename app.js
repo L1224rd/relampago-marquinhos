@@ -10,21 +10,21 @@
   * as fast as possible, without telling them to go to the right.
   */
 
-const fs = require('fs'); // used to write avgs.js file that will be used to see a graph at index.html
+const fs = require('fs'); // Used to write avgs.js file that will be used to see a graph at index.html
 
-let generation = 0; // current generation index
+let generation = 0; // Current generation index
 
-const Car = () => { // a 'car' is a string with directions, 0=up, 1=right, 2=down, 3=left 
+const Car = () => { // A 'car' is a string with directions, 0=up, 1=right, 2=down, 3=left 
   let res = '';
 
-  for (let i = 0; i < 20; i++) { // each car has 20 random directions
+  for (let i = 0; i < 20; i++) { // Each car has 20 random directions
     res += Math.floor(Math.random() * 4)
   }
 
   return res;
 };
 
-const getDist = (car) => { // distance from origin to current position at 'x' axis
+const getDist = (car) => { // Distance from origin to current position at 'x' axis
   let dist = 0;
 
 
@@ -40,19 +40,19 @@ const getDist = (car) => { // distance from origin to current position at 'x' ax
   return dist;
 };
 
-const procriate = (cars) => { // make a better generations from the current one
+const procriate = (cars) => { // Make a better generations from the current one
   generation++;
 
   const newCars = [...cars];
 
-  newCars.sort((a, b) => { // order the cars by their distances
+  newCars.sort((a, b) => { // Order the cars by their distances
     return getDist(b) - getDist(a);
   });
 
   
   // "kill" the second half of the cars
-  // duplicate the first half
-  // change one property of the "children" of the first half (mutate a gen randomly)
+  // Duplicate the first half
+  // Change one property of the "children" of the first half (mutate a gen randomly)
 
   const topCars = newCars.slice(0, newCars.length / 2); 
   const bottomCars = [...topCars];
@@ -66,7 +66,7 @@ const procriate = (cars) => { // make a better generations from the current one
   return carsModified;
 };
 
-const stats = (cars) => { // get stats such as best car, worst car and average
+const stats = (cars) => { // Get stats such as best car, worst car and average
   let min = 100;
   let max = 0;
   let sum = 0;
@@ -88,25 +88,30 @@ const stats = (cars) => { // get stats such as best car, worst car and average
   };
 }
 
+
 // ================================================= //
 
 const myCars = [];
 
-for (let i = 0; i < 50; i++) { // generate a generation with 50 cars
+for (let i = 0; i < 50; i++) { // Generate a generation with 50 cars
   myCars.push(Car());
 }
 
 let currentGeneration = [...myCars];
 
 const avgs = [];
-const POI = [0, 20, 40, 60, 99]; // Points Of Iterest, used to console specifc generations
 
-for (let i = 0; i < 100; i++) { // evolve them 100 times
+const POI = [0, 20, 40, 60, 99]; // Points Of Interest, used to console specific generations
+
+for (let i = 0; i < 100; i++) { // Evolve them 100 times
   if(POI.indexOf(i) !== -1){
-    console.log(stats(currentGeneration)); // console specifc generation
+    console.log(stats(currentGeneration)); // Console specific generation
     console.log(currentGeneration);
   }
-  avgs.push(stats(currentGeneration).avg); // used to make a graph in index.html
+  avgs.push({
+    avg: stats(currentGeneration).avg,
+    best: currentGeneration[0],
+  }); // Used to make a graph in index.html
   currentGeneration = procriate(currentGeneration);
 }
 
