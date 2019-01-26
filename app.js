@@ -5,10 +5,10 @@
  * "breeding" from them (Natural Selection).
  */
 
- /**
-  * In our case, we are "teaching" cars, to go to the right,
-  * as fast as possible, without telling them to go to the right.
-  */
+/**
+ * In our case, we are "teaching" cars, to go to the right,
+ * as fast as possible, without telling them to go to the right.
+ */
 
 const fs = require('fs'); // Used to write avgs.js file that will be used to see a graph at index.html
 
@@ -49,12 +49,12 @@ const procriate = (cars) => { // Make a better generations from the current one
     return getDist(b) - getDist(a);
   });
 
-  
+
   // "kill" the second half of the cars
   // Duplicate the first half
   // Change one property of the "children" of the first half (mutate a gen randomly)
 
-  const topCars = newCars.slice(0, newCars.length / 2); 
+  const topCars = newCars.slice(0, newCars.length / 2);
   const bottomCars = [...topCars];
 
   const carsModified = topCars.concat(bottomCars.map((car) => { // "mutate" one of the "gens" of the car
@@ -104,13 +104,13 @@ const avgs = [];
 const POI = [0, 20, 40, 60, 99]; // Points Of Interest, used to console specific generations
 
 for (let i = 0; i < 100; i++) { // Evolve them 100 times
-  if(POI.indexOf(i) !== -1){
+  if (POI.indexOf(i) !== -1) {
     console.log(stats(currentGeneration)); // Console specific generation
     console.log(currentGeneration);
   }
   avgs.push({
     avg: stats(currentGeneration).avg,
-    best: currentGeneration[0],
+    medium: currentGeneration[currentGeneration.length / 2],
   }); // Used to make a graph in index.html
   currentGeneration = procriate(currentGeneration);
 }
