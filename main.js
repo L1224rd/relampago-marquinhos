@@ -12,8 +12,7 @@ window.showHistory = (element) => {
   ctx.fill();
   
   ctx.moveTo(100, 50);
-  //console.log(xctx + ', ' + yctx);
-  //console.log(car);
+
   car.forEach((cmd) => {
     if (cmd === '0') {
       ctx.lineTo(xctx, yctx - 5)
@@ -32,15 +31,10 @@ window.showHistory = (element) => {
       xctx -= 5;
     }
   })
-  /*
-  ctx.beginPath();
-  ctx.arc(xctx, yctx, 3, 0, 2 * Math.PI);
-  ctx.fillStyle = 'red'
-  ctx.fill();
-  */
+  
   ctx.stroke();
 }
 
 avgs.forEach((avg) => { // get data from avgs.js and make graph
-  document.querySelector('#graph').innerHTML += `<div id="${avg.medium}" onclick="window.showHistory(this)" style="height: 5px; width: ${avg.avg * 50}px; background-color: green; border-style: solid; border-width: 1px;"></div>`;
+  document.querySelector('#graph').innerHTML += `<span id="${avg.medium}" onclick="window.showHistory(this)" style="height: ${avg.avg * 20}px; width: 10px; background-color: #006e21; cursor: pointer;"></span>`;
 });
