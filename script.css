@@ -12,3 +12,18 @@ body {
   bottom: 0px;
   right: 0px;
 }
+
+#draws-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#draws-container canvas{
+  background-color: white;
+}
+
+p {
+  color: white;
+  text-align: center;
+}

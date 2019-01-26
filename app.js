@@ -108,9 +108,14 @@ for (let i = 0; i < 70; i++) { // Evolve them 70 times
     console.log(stats(currentGeneration)); // Console specific generation
     console.log(currentGeneration);
   }
+
   avgs.push({
     avg: stats(currentGeneration).avg,
-    medium: currentGeneration[currentGeneration.length / 2],
+    cars: [
+      currentGeneration[currentGeneration.length - 1],
+      currentGeneration[currentGeneration.length / 2],
+      currentGeneration[0],
+    ],
   }); // Used to make a graph in index.html
   currentGeneration = procriate(currentGeneration);
 }
